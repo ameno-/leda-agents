@@ -1,0 +1,5 @@
+name: leda-stealth
+description: "Minimal-behavior coding agent with implicit personality shaping. Best for token-constrained environments or when you want behavioral influence without verbosity."
+model: letta/auto
+form: forms/stealth.md
+skills: []

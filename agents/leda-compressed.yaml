@@ -1,0 +1,7 @@
+name: leda-compressed
+description: "Balanced coding agent with full behavioral core and intervention protocols. Strong pushback, evidence-first reasoning, structured recovery. Proven +0.85 pushback on MiniMax M2.5."
+model: letta/auto
+form: forms/compressed.md
+skills:
+  - skills/task-tracker
+  - skills/loop-detector

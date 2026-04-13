@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "forge-personality-system/layers.json",
+  "description": "Composable personality layer definitions. Select subsets for different target tools and contexts.",
+  "layers": [
+    {
+      "id": "core",
+      "name": "Core Behavioral Constitution",
+      "description": "The 6 foundational behavioral rules: evidence-first, answer-first, pushback, low-drama, execution-aware, scope-respect.",
+      "approximateTokens": 150,
+      "required": true,
+      "dependencies": [],
+      "constitutionSections": ["behavioralInvariants"],
+      "forms": ["compressed", "stealth", "full"],
+      "targetSupport": ["codex", "forge", "gemini", "claude", "pi", "kimi", "goose"]
+    },
+    {
+      "id": "structure",
+      "name": "Response Structure",
+      "description": "Default response ordering for analysis and implementation turns. Adaptive, not mechanical.",
+      "approximateTokens": 100,
+      "required": false,
+      "dependencies": ["core"],
+      "constitutionSections": ["responseDefaults"],
+      "forms": ["full"],
+      "targetSupport": ["codex", "forge", "gemini", "claude", "pi", "kimi", "goose"]
+    },
+    {
+      "id": "intervention",
+      "name": "Intervention Protocols",
+      "description": "Doom loop detection and tool retry recovery templates. Structured recovery checklists.",
+      "approximateTokens": 100,
+      "required": false,
+      "dependencies": ["core"],
+      "constitutionSections": ["interventionProtocols"],
+      "forms": ["compressed", "stealth", "full"],
+      "targetSupport": ["codex", "forge", "gemini", "claude", "pi", "kimi", "goose"]
+    },
+    {
+      "id": "orchestration",
+      "name": "Orchestration Discipline",
+      "description": "Batch-oriented planning, one-shot delivery protocol, independence rules, and anti-patterns.",
+      "approximateTokens": 300,
+      "required": false,
+      "dependencies": ["core", "structure"],
+      "constitutionSections": ["orchestration", "citation"],
+      "forms": ["full"],
+      "targetSupport": ["codex", "forge", "goose"]
+    },
+    {
+      "id": "followthrough",
+      "name": "Follow-Through",
+      "description": "Completion gates, verification requirements, pending item classification, and completion documentation.",
+      "approximateTokens": 400,
+      "required": false,
+      "dependencies": ["core", "orchestration"],
+      "constitutionSections": ["followThrough"],
+      "forms": ["full"],
+      "targetSupport": ["codex", "forge", "goose"]
+    },
+    {
+      "id": "memory",
+      "name": "Working Memory",
+      "description": "Structured working memory schema, read/write discipline, and quality standards.",
+      "approximateTokens": 500,
+      "required": false,
+      "dependencies": ["followthrough"],
+      "constitutionSections": ["memory"],
+      "forms": ["full"],
+      "targetSupport": ["codex", "forge"]
+    },
+    {
+      "id": "enforcement",
+      "name": "Runtime Enforcement",
+      "description": "Hooks, MCP servers, and deterministic scripts. Tool-specific enforcement capabilities.",
+      "approximateTokens": 200,
+      "required": false,
+      "dependencies": ["memory"],
+      "constitutionSections": [],
+      "forms": [],
+      "targetSupport": ["codex", "forge"],
+      "notes": "Not derived from constitution.json — tool-specific configuration."
+    }
+  ],
+  "presets": {
+    "minimal": {
+      "description": "For token-limited tools. Core behavioral essence only.",
+      "layers": ["core"],
+      "approximateTokens": 150,
+      "useForm": "stealth"
+    },
+    "standard": {
+      "description": "For most CLI tools. Behavioral defaults plus recovery.",
+      "layers": ["core", "structure", "intervention"],
+      "approximateTokens": 350,
+      "useForm": "compressed"
+    },
+    "full": {
+      "description": "For tools with full config support (Codex, Forge). Everything except runtime enforcement.",
+      "layers": ["core", "structure", "intervention", "orchestration", "followthrough", "memory"],
+      "approximateTokens": 1550,
+      "useForm": "full"
+    },
+    "enforced": {
+      "description": "Maximum quality. Full personality plus deterministic runtime enforcement.",
+      "layers": ["core", "structure", "intervention", "orchestration", "followthrough", "memory", "enforcement"],
+      "approximateTokens": 1750,
+      "useForm": "full",
+      "targetSupport": ["codex", "forge"]
+    }
+  }
+}

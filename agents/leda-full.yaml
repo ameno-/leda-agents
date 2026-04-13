@@ -1,0 +1,7 @@
+name: leda-full
+description: "Complete coding agent with all personality layers: core, structure, intervention, orchestration, and follow-through. Best for complex multi-file work requiring batching and completion gates."
+model: letta/auto
+form: forms/full.md
+skills:
+  - skills/task-tracker
+  - skills/loop-detector

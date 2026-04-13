@@ -1,0 +1,222 @@
+{
+  "name": "forge-personality-system",
+  "version": "1.0.0",
+  "purpose": "Portable behavioral constitution and intervention package for AI coding agents.",
+  "canonicalSource": "constitution.json",
+  "macroModel": "Intake -> Control Plane -> Execute",
+  "designGoals": [
+    "Single source of truth: constitution.json is the canonical definition for all behavioral content",
+    "Composable layers: personality can be applied as a subset (core only, core+intervention, full, etc.)",
+    "Tool-agnostic core: behavioral principles work across any LLM tool",
+    "Portable forms: compressed and stealth forms for token-limited or invisible personality application",
+    "Structured enforcement: deterministic validation where the target tool supports it",
+    "Derived artifacts: all prompt fragments and target configs are generated from constitution.json"
+  ],
+  "layers": [
+    {
+      "id": "core",
+      "name": "Core Behavioral Constitution",
+      "approximateTokens": 150,
+      "required": true,
+      "description": "The 6 foundational behavioral rules. Always included in every target."
+    },
+    {
+      "id": "structure",
+      "name": "Response Structure",
+      "approximateTokens": 100,
+      "required": false,
+      "dependencies": ["core"],
+      "description": "Default response ordering for analysis and implementation turns."
+    },
+    {
+      "id": "intervention",
+      "name": "Intervention Protocols",
+      "approximateTokens": 100,
+      "required": false,
+      "dependencies": ["core"],
+      "description": "Doom loop detection and tool retry recovery templates."
+    },
+    {
+      "id": "orchestration",
+      "name": "Orchestration Discipline",
+      "approximateTokens": 300,
+      "required": false,
+      "dependencies": ["core", "structure"],
+      "description": "Batch-oriented planning and one-shot delivery protocol."
+    },
+    {
+      "id": "followthrough",
+      "name": "Follow-Through",
+      "approximateTokens": 400,
+      "required": false,
+      "dependencies": ["core", "orchestration"],
+      "description": "Completion gates, verification requirements, and pending item discipline."
+    },
+    {
+      "id": "memory",
+      "name": "Working Memory",
+      "approximateTokens": 500,
+      "required": false,
+      "dependencies": ["followthrough"],
+      "description": "Structured working memory schema and read/write discipline."
+    },
+    {
+      "id": "enforcement",
+      "name": "Runtime Enforcement",
+      "approximateTokens": 200,
+      "required": false,
+      "dependencies": ["memory"],
+      "description": "Hooks, MCP servers, and deterministic scripts. Tool-specific."
+    }
+  ],
+  "components": [
+    {
+      "id": "constitution",
+      "kind": "canonical_source",
+      "path": "constitution.json",
+      "status": "ready",
+      "description": "Single source of truth for all behavioral content. All generated artifacts derive from this."
+    },
+    {
+      "id": "layer_definitions",
+      "kind": "configuration",
+      "path": "constitution.json#layers",
+      "status": "ready",
+      "description": "Layer metadata, token budgets, and dependency graph embedded in constitution."
+    },
+    {
+      "id": "target_compatibility",
+      "kind": "configuration",
+      "path": "constitution.json#targetCompatibility",
+      "status": "ready",
+      "description": "Per-target layer support and enforcement capability matrix."
+    },
+    {
+      "id": "render_pipeline",
+      "kind": "tool",
+      "path": "scripts/render.sh",
+      "status": "pending",
+      "description": "Generates all prompt fragments and target configs from constitution.json"
+    },
+    {
+      "id": "validation_pipeline",
+      "kind": "tool",
+      "path": "scripts/validate.sh",
+      "status": "pending",
+      "description": "Validates constitution schema, generated artifacts, and cross-references"
+    },
+    {
+      "id": "personality_forms",
+      "kind": "artifact",
+      "path": "forms/",
+      "status": "pending",
+      "description": "Compressed, stealth, and full personality forms for different application contexts"
+    },
+    {
+      "id": "core_constitution_prompt",
+      "kind": "generated_fragment",
+      "path": "prompt-fragments/core-constitution.md",
+      "status": "pending",
+      "description": "Generated from constitution.json behavioralInvariants"
+    },
+    {
+      "id": "peer_response_contract",
+      "kind": "generated_fragment",
+      "path": "prompt-fragments/peer-response-contract.md",
+      "status": "pending",
+      "description": "Generated from constitution.json responseDefaults"
+    },
+    {
+      "id": "session_overlay",
+      "kind": "generated_fragment",
+      "path": "prompt-fragments/session-overlay.md",
+      "status": "pending",
+      "description": "Generated from constitution.json (layers: core, structure, intervention)"
+    },
+    {
+      "id": "doom_loop_protocol",
+      "kind": "generated_fragment",
+      "path": "prompt-fragments/reflective-doom-loop.md",
+      "status": "pending",
+      "description": "Generated from constitution.json interventionProtocols.doomLoop"
+    },
+    {
+      "id": "tool_retry_protocol",
+      "kind": "generated_fragment",
+      "path": "prompt-fragments/reflective-tool-retry.md",
+      "status": "pending",
+      "description": "Generated from constitution.json interventionProtocols.toolRetry"
+    },
+    {
+      "id": "working_memory_schema",
+      "kind": "json_schema",
+      "path": "schemas/working-memory.schema.json",
+      "status": "ready",
+      "description": "Reconciled schema matching the Codex implementation (task guardian, MCP server)"
+    },
+    {
+      "id": "instruction_hierarchy_schema",
+      "kind": "json_schema",
+      "path": "schemas/instruction-hierarchy.schema.json",
+      "status": "experimental",
+      "description": "Future typed instruction precedence. No runtime consumers yet."
+    },
+    {
+      "id": "constitution_schema",
+      "kind": "json_schema",
+      "path": "schemas/constitution.schema.json",
+      "status": "pending",
+      "description": "Schema for validating constitution.json itself"
+    },
+    {
+      "id": "codex_config",
+      "kind": "generated_configuration",
+      "path": "codex-config/",
+      "status": "ready",
+      "description": "Full Codex integration: agents, rules, skills, hooks, MCP server. Marked as generated artifacts."
+    },
+    {
+      "id": "forge_integration_map",
+      "kind": "integration_map",
+      "path": "integrations/forge-integration.json",
+      "status": "draft",
+      "description": "Proposed Forge integration seams using template variables"
+    },
+    {
+      "id": "workshop_integration_map",
+      "kind": "integration_map",
+      "path": "integrations/workshop-integration.json",
+      "status": "draft",
+      "description": "Workshop integration seams"
+    },
+    {
+      "id": "codex_integration_map",
+      "kind": "integration_map",
+      "path": "integrations/codex-integration.md",
+      "status": "ready",
+      "description": "Codex-specific mapping and implementation guide"
+    },
+    {
+      "id": "evals",
+      "kind": "tool",
+      "path": "evals/",
+      "status": "ready",
+      "description": "Evaluation framework: behavioral presence, intervention recovery, regression safety. Local install, model-agnostic, comparative scoring."
+    }
+  ],
+  "futureWork": [
+    "Render pipeline implementation (scripts/render.sh)",
+    "Validation pipeline (scripts/validate.sh)",
+    "Personality forms (compressed, stealth, full)",
+    "Phase 1 Forge prompt integration",
+    "Gemini CLI port (layers: core, structure, intervention)",
+    "Claude CLI port (layers: core, structure, intervention)",
+    "Pi agent port (layers: core, structure, intervention)",
+    "Kimi port (layers: core, structure, intervention)",
+    "Goose port (layers: core through followthrough)",
+    "CLI install tool for target-specific configuration generation",
+    "Evals: add more test cases per dimension",
+    "Evals: Mastra scorer integration for persistent tracking",
+    "Evals: CI integration (score thresholds as gates)"
+  ]
+}
