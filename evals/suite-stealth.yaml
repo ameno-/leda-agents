@@ -1,0 +1,25 @@
+name: leda-stealth-personality-eval
+dataset: dataset.jsonl
+target:
+  kind: letta_agent
+  agent_file: leda-stealth.af
+  base_url: http://localhost:51876
+graders:
+  personality:
+    kind: model_judge
+    prompt_path: rubric.txt
+    model: gpt-4o-mini
+    temperature: 0.0
+    provider: openai
+    max_retries: 3
+    timeout: 120.0
+    extractor: last_assistant
+    rubric_vars:
+      - task_name
+      - tested_dimensions
+gate:
+  kind: simple
+  metric_key: personality
+  aggregation: avg_score
+  op: gte
+  value: 0.3
