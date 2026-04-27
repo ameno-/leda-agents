@@ -1,0 +1,180 @@
+{
+  "agents": [
+    {
+      "name": "Matilda",
+      "memory_blocks": [
+        {
+          "label": "persona",
+          "description": "Matilda's identity and behavioral rules",
+          "value": "# Matilda's identity and behavioral rules\n\n(To be populated on first boot)\n"
+        },
+        {
+          "label": "human",
+          "description": "Operator profile",
+          "value": "# Operator\n\nAmeno Osman. Staff Frontend Engineer. Direct, code-first.\n"
+        },
+        {
+          "label": "eval-config",
+          "description": "Eval infrastructure locations and configuration",
+          "value": "# Eval infrastructure locations and configuration\n\n(To be populated on first boot)\n"
+        },
+        {
+          "label": "eval-results",
+          "description": "Historical eval results for comparison",
+          "value": "# Eval Results\n\n(Updated as runs complete)\n"
+        },
+        {
+          "label": "team-routing",
+          "description": "Agent team routing rules",
+          "value": "# Team Routing\n\n- Anvil: supervisor, coordinator\n- Cipher: infrastructure\n- Letta Code: implementation\n- Hemingway: writing, editorial\n- Matilda (you): personality eval\n"
+        }
+      ],
+      "tools": [],
+      "tool_ids": [],
+      "source_ids": [],
+      "block_ids": [],
+      "tool_rules": [],
+      "tags": [
+        "eval",
+        "personality",
+        "specialist"
+      ],
+      "system": "You are Matilda, a personality evaluation specialist agent.\n\nYou run behavioral eval harnesses against personality configurations, grade responses, and produce actionable improvement recommendations.\n\nYou have access to two custom tools:\n- run_eval: Execute eval harness runs against personality configs\n- analyze_eval: Analyze results and generate reports\n\nYour memory contains:\n- persona: Your identity and behavioral rules\n- eval-config: Infrastructure locations, model handles, task reference\n- eval-results: Historical eval results for comparison\n- team-routing: How to route work to other agents\n\nAlways consult your known-results reference before recommending changes.\nNever recommend a change you haven't tested or that contradicts known anti-correlation patterns.\n\n",
+      "agent_type": "letta_v1_agent",
+      "llm_config": {
+        "model": "glm-4.7",
+        "model_endpoint_type": "openai",
+        "model_endpoint": "https://open.bigmodel.cn/api/paas/v4",
+        "provider_name": "zai",
+        "provider_category": "base",
+        "model_wrapper": null,
+        "context_window": 131072,
+        "put_inner_thoughts_in_kwargs": true,
+        "handle": "zai/glm-4.7",
+        "temperature": 0.3,
+        "max_tokens": null,
+        "enable_reasoner": false,
+        "reasoning_effort": null,
+        "max_reasoning_tokens": 0,
+        "frequency_penalty": 1.0,
+        "compatibility_type": null,
+        "verbosity": null,
+        "tier": "free"
+      },
+      "embedding_config": {
+        "embedding_endpoint_type": "openai",
+        "embedding_endpoint": "https://api.openai.com/v1",
+        "embedding_model": "text-embedding-3-small",
+        "embedding_dim": 2000,
+        "embedding_chunk_size": 300,
+        "handle": "openai/text-embedding-3-small",
+        "batch_size": 1024,
+        "azure_endpoint": null,
+        "azure_version": null,
+        "azure_deployment": null
+      },
+      "initial_message_sequence": null,
+      "include_base_tools": true,
+      "include_multi_agent_tools": true,
+      "include_base_tool_rules": true,
+      "include_default_source": true,
+      "description": "Personality evaluation specialist \u2014 runs eval harnesses, analyzes results, recommends personality improvements",
+      "metadata": {
+        "role": "eval-specialist",
+        "project": "leda-agents"
+      },
+      "model": null,
+      "embedding": null,
+      "context_window_limit": null,
+      "embedding_chunk_size": null,
+      "max_tokens": null,
+      "max_reasoning_tokens": null,
+      "enable_reasoner": false,
+      "reasoning": null,
+      "from_template": null,
+      "template": false,
+      "project": null,
+      "tool_exec_environment_variables": {},
+      "memory_variables": null,
+      "project_id": null,
+      "template_id": null,
+      "base_template_id": null,
+      "identity_ids": null,
+      "message_buffer_autoclear": false,
+      "enable_sleeptime": false,
+      "response_format": null,
+      "timezone": "UTC",
+      "max_files_open": 5,
+      "per_file_view_window_char_limit": 15000,
+      "hidden": null,
+      "id": "agent-matilda-0",
+      "in_context_message_ids": [
+        "message-matilda-0"
+      ],
+      "messages": [
+        {
+          "type": "message",
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "You are Matilda, a personality evaluation specialist agent.\n\nYou run behavioral eval harnesses against personality configurations, grade responses, and produce actionable improvement recommendations.\n\nYou have access to two custom tools:\n- run_eval: Execute eval harness runs against personality configs\n- analyze_eval: Analyze results and generate reports\n\nYour memory contains:\n- persona: Your identity and behavioral rules\n- eval-config: Infrastructure locations, model handles, task reference\n- eval-results: Historical eval results for comparison\n- team-routing: How to route work to other agents\n\nAlways consult your known-results reference before recommending changes.\nNever recommend a change you haven't tested or that contradicts known anti-correlation patterns.\n\n\n\nThe following memory blocks are currently engaged in your core memory unit:\n\npersona: Matilda's identity and behavioral rules\nhuman: Operator profile\neval-config: Eval infrastructure locations and configuration\neval-results: Historical eval results\nteam-routing: Agent team routing rules\n\n- The current system date is: April 25, 2026\n- Memory blocks were last modified: 2026-04-25\n- 0 previous messages between you and the user are stored in recall memory\n"
+            }
+          ],
+          "name": null,
+          "otid": null,
+          "sender_id": null,
+          "batch_item_id": null,
+          "group_id": null,
+          "id": "message-matilda-0",
+          "model": "glm-4.7",
+          "agent_id": "agent-matilda-0",
+          "tool_calls": null,
+          "tool_call_id": null,
+          "tool_returns": [],
+          "created_at": "2026-04-25T00:00:00.000000+00:00"
+        }
+      ],
+      "files_agents": [],
+      "group_ids": []
+    }
+  ],
+  "groups": [],
+  "blocks": [],
+  "files": [],
+  "sources": [
+    {
+      "name": "run_eval",
+      "description": "Run personality eval harness and return structured results",
+      "source_code": "\"\"\"\nMatilda custom tool: run_eval\nRuns the personality eval harness and returns structured results.\n\"\"\"\nimport subprocess\nimport json\nimport os\n\nHARNESS_DIR = \"/tmp/personality-eval-harness\"\n\ndef run_eval(\n    model: str,\n    personality: str,\n    task: str,\n    runs: int = 3,\n    harness_dir: str = HARNESS_DIR\n) -> dict:\n    \"\"\"Run personality eval harness and return results.\n\n    Args:\n        model: Model handle (e.g. \"zai/glm-4.7\")\n        personality: Personality file name (e.g. \"compressed\")\n        task: Task ID (e.g. \"002\")\n        runs: Number of runs to average (default 3)\n        harness_dir: Path to harness directory\n\n    Returns:\n        Dict with model, personality, task, runs, scores, overall, raw_output\n    \"\"\"\n    results = []\n    for i in range(runs):\n        cmd = [\n            \"python3\", f\"{harness_dir}/harness.py\",\n            \"--model\", model,\n            \"--personality\", personality,\n            \"--task\", task,\n        ]\n        proc = subprocess.run(\n            cmd,\n            cwd=harness_dir,\n            capture_output=True,\n            text=True,\n            timeout=300,\n        )\n        if proc.returncode != 0:\n            return {\n                \"error\": f\"Run {i+1} failed: {proc.stderr[:500]}\",\n                \"model\": model,\n                \"personality\": personality,\n                \"task\": task,\n            }\n\n        # Parse the JSON output from harness\n        try:\n            run_result = json.loads(proc.stdout.strip().split('\\n')[-1])\n            results.append(run_result)\n        except (json.JSONDecodeError, IndexError):\n            # Try parsing entire output\n            try:\n                run_result = json.loads(proc.stdout)\n                results.append(run_result)\n            except json.JSONDecodeError:\n                return {\n                    \"error\": f\"Could not parse output: {proc.stdout[:500]}\",\n                    \"model\": model,\n                    \"personality\": personality,\n                    \"task\": task,\n                }\n\n    if not results:\n        return {\"error\": \"No successful runs\", \"model\": model, \"personality\": personality, \"task\": task}\n\n    # Average scores across runs\n    dimensions = [\"scope_respect\", \"evidence_first\", \"execution_aware\", \"low_drama\", \"professional_tone\", \"answer_first\"]\n    avg_scores = {}\n    for dim in dimensions:\n        vals = [r.get(\"scores\", {}).get(dim, 0) for r in results if \"scores\" in r]\n        avg_scores[dim] = round(sum(vals) / len(vals), 3) if vals else 0.0\n\n    overall = round(sum(avg_scores.values()) / len(avg_scores), 3) if avg_scores else 0.0\n\n    return {\n        \"model\": model,\n        \"personality\": personality,\n        \"task\": task,\n        \"runs\": len(results),\n        \"scores\": avg_scores,\n        \"overall\": overall,\n        \"raw\": results,\n    }\n\n\nif __name__ == \"__main__\":\n    import argparse\n    p = argparse.ArgumentParser()\n    p.add_argument(\"--model\", required=True)\n    p.add_argument(\"--personality\", required=True)\n    p.add_argument(\"--task\", required=True)\n    p.add_argument(\"--runs\", type=int, default=3)\n    args = p.parse_args()\n    print(json.dumps(run_eval(args.model, args.personality, args.task, args.runs), indent=2))\n"
+    },
+    {
+      "name": "analyze_eval",
+      "description": "Analyze eval results and generate reports with recommendations",
+      "source_code": "\"\"\"\nMatilda custom tool: analyze_eval\nAnalyzes eval results from the harness, compares configurations, and generates reports.\n\"\"\"\nimport json\nimport os\nfrom datetime import datetime\n\nRESULTS_FILE = \"/tmp/personality-eval-harness/results/runs.jsonl\"\n\n\ndef analyze_eval(\n    results_file: str = RESULTS_FILE,\n    model: str = None,\n    personality: str = None,\n    task: str = None,\n    compare: bool = False,\n    threshold: float = 0.7,\n) -> dict:\n    \"\"\"Analyze eval results and generate report.\n\n    Args:\n        results_file: Path to runs.jsonl\n        model: Filter by model handle (optional)\n        personality: Filter by personality name (optional)\n        task: Filter by task ID (optional)\n        compare: If True, compare across all matching configs\n        threshold: Score below which a dimension is flagged weak (default 0.7)\n\n    Returns:\n        Dict with summary, flagged dimensions, and recommendations\n    \"\"\"\n    if not os.path.exists(results_file):\n        return {\"error\": f\"Results file not found: {results_file}\"}\n\n    runs = []\n    with open(results_file) as f:\n        for line in f:\n            line = line.strip()\n            if not line:\n                continue\n            try:\n                run = json.loads(line)\n                # Apply filters\n                if model and run.get(\"model\") != model:\n                    continue\n                if personality and run.get(\"personality\") != personality:\n                    continue\n                if task and run.get(\"task\") != task:\n                    continue\n                runs.append(run)\n            except json.JSONDecodeError:\n                continue\n\n    if not runs:\n        return {\"error\": \"No matching runs found\", \"filters\": {\"model\": model, \"personality\": personality, \"task\": task}}\n\n    dimensions = [\"scope_respect\", \"evidence_first\", \"execution_aware\", \"low_drama\", \"professional_tone\", \"answer_first\"]\n\n    if compare:\n        # Group by config and compare\n        configs = {}\n        for run in runs:\n            key = f\"{run.get('model', 'unknown')}/{run.get('personality', 'unknown')}\"\n            if key not in configs:\n                configs[key] = []\n            configs[key].append(run)\n\n        comparison = {}\n        for key, config_runs in configs.items():\n            avg = {}\n            for dim in dimensions:\n                vals = [r.get(\"scores\", {}).get(dim, 0) for r in config_runs if \"scores\" in r]\n                avg[dim] = round(sum(vals) / len(vals), 3) if vals else 0.0\n            overall = round(sum(avg.values()) / len(avg), 3) if avg else 0.0\n            comparison[key] = {\"scores\": avg, \"overall\": overall, \"runs\": len(config_runs)}\n\n        # Find best config\n        best_key = max(comparison, key=lambda k: comparison[k][\"overall\"])\n\n        return {\n            \"type\": \"comparison\",\n            \"configs\": comparison,\n            \"best\": best_key,\n            \"best_score\": comparison[best_key][\"overall\"],\n            \"total_runs\": len(runs),\n        }\n\n    # Single config analysis\n    avg_scores = {}\n    for dim in dimensions:\n        vals = [r.get(\"scores\", {}).get(dim, 0) for r in runs if \"scores\" in r]\n        avg_scores[dim] = round(sum(vals) / len(vals), 3) if vals else 0.0\n\n    overall = round(sum(avg_scores.values()) / len(avg_scores), 3) if avg_scores else 0.0\n\n    # Flag weak dimensions\n    weak = {dim: score for dim, score in avg_scores.items() if score < threshold}\n    weakest = min(avg_scores, key=avg_scores.get) if avg_scores else None\n\n    # Generate recommendation\n    recommendation = None\n    if weak:\n        tuning = {\n            \"scope_respect\": \"Add: 'Do ONE task at a time. State what you are deferring.'\",\n            \"evidence_first\": \"Add: 'Investigate before concluding. Read files, then act.'\",\n            \"execution_aware\": \"Add: 'Verify before declaring done. Ask: what could go wrong?'\",\n            \"low_drama\": \"Add: 'Be terse. No filler, no hedging, no unnecessary reassurance.'\",\n            \"professional_tone\": \"Add: 'Be peer-to-peer. Assume the user is a senior engineer.'\",\n            \"answer_first\": \"Add: 'Answer first. Explanations second. No preambles.'\",\n        }\n        recommendation = {\n            \"weakest_dimension\": weakest,\n            \"score\": avg_scores.get(weakest, 0),\n            \"suggested_fix\": tuning.get(weakest, \"Review task responses for patterns\"),\n            \"warning\": \"Warning: adding evidence_first rules may reduce scope_respect due to anti-correlation\"\n                if weakest == \"evidence_first\" else None,\n        }\n\n    return {\n        \"type\": \"analysis\",\n        \"config\": f\"{model or 'all'}/{personality or 'all'}\",\n        \"task\": task or \"all\",\n        \"runs\": len(runs),\n        \"scores\": avg_scores,\n        \"overall\": overall,\n        \"weak_dimensions\": weak,\n        \"recommendation\": recommendation,\n    }\n\n\nif __name__ == \"__main__\":\n    import argparse\n    p = argparse.ArgumentParser()\n    p.add_argument(\"--model\", default=None)\n    p.add_argument(\"--personality\", default=None)\n    p.add_argument(\"--task\", default=None)\n    p.add_argument(\"--compare\", action=\"store_true\")\n    p.add_argument(\"--threshold\", type=float, default=0.7)\n    p.add_argument(\"--results-file\", default=RESULTS_FILE)\n    args = p.parse_args()\n    print(json.dumps(analyze_eval(\n        results_file=args.results_file,\n        model=args.model,\n        personality=args.personality,\n        task=args.task,\n        compare=args.compare,\n        threshold=args.threshold,\n    ), indent=2))\n"
+    }
+  ],
+  "tools": [],
+  "mcp_servers": [],
+  "metadata": {
+    "revision_id": "matilda-v1",
+    "notes": "Matilda eval specialist. See agents/matilda/memory/ for full memory files.",
+    "custom_tools": [
+      "run_eval",
+      "analyze_eval"
+    ],
+    "skills": [
+      "eval-harness",
+      "forge-personality"
+    ],
+    "memory_blocks": [
+      "persona",
+      "human",
+      "eval-config",
+      "eval-results",
+      "team-routing"
+    ],
+    "gitea_repo": "agents/matilda"
+  },
+  "created_at": "2026-04-25T00:00:00.000000+00:00"
+}

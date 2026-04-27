@@ -1,0 +1,15 @@
+{
+  "id": "stealth-v1",
+  "canonical_name": "stealth",
+  "form": "stealth",
+  "layers": ["core", "intervention"],
+  "notes": "Baseline stealth profile matching the current low-token Leda form.",
+  "params": {
+    "refusal_strength": "medium",
+    "refusal_style": "kind",
+    "investigation_bias": "low",
+    "loop_intervention_aggressiveness": "medium",
+    "verification_rigidity": "medium",
+    "verbosity_budget": "tight"
+  }
+}

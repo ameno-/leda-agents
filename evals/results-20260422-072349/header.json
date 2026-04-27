@@ -1,0 +1,22 @@
+{
+  "type": "header",
+  "suite": "20260422-072349",
+  "config": {
+    "personalities": [
+      "stealth",
+      "compressed",
+      "full",
+      "none"
+    ],
+    "models": {
+      "m27": "minimax/MiniMax-M2.7"
+    },
+    "tasks": [
+      0,
+      1,
+      2
+    ],
+    "sandbox_id": "5af87c54-f23a-4818-bc50-51aafb4f01df",
+    "total_runs": 12
+  }
+}

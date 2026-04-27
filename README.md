@@ -1,74 +1,86 @@
 # Leda Agents
 
-Personality-driven Letta agents with measurable behavioral differences. Three agents, three personality configs, same tasks.
+Parameterized personality architecture and Letta evals for testing how agent behavior changes across models.
 
-## The Three Agents
+## Core result
 
-| Agent | Form | Tokens | Strengths |
-|-------|------|--------|-----------|
-| **leda-stealth** | Stealth (~100t) | Minimal overhead, fast execution | Token-constrained environments |
-| **leda-compressed** | Compressed (~150t) | Pushback, evidence-first, loop recovery | Most development work |
-| **leda-full** | Full (~500t) | Complete constitution, orchestration, follow-through | Complex multi-file work |
+The most important result in this repo is not that personality matters.
+It's that **stronger models can regress under heavier personality structure**.
+
+From [`evals/results.md`](./evals/results.md):
+
+| Form | Auto/Letta | M2.5 | M2.7 |
+|------|------------|------|------|
+| Stealth | 0.73 | 0.77 | 0.82 |
+| Compressed | 0.80 | 0.70 | 0.75 |
+| Full | 0.63 | 0.70 | 0.67 |
+
+Stealth improved monotonically with stronger models.
+Full did not.
+
+That points to a more interesting failure mode than "long prompts bad":
+**instruction hierarchy conflict**.
 
 ## Architecture
 
-```
-constitution.json    ←  Single source of truth (6 behavioral invariants, 7 composable layers)
+```text
+constitution.json    ← canonical behavioral source
        ↓
-   forms/            ←  Rendered personality forms (stealth, compressed, full)
+personality/         ← parameter schema, profiles, lexicons, render templates
        ↓
-  agents/            ←  Letta agent configs referencing forms + skills
+generated/           ← rendered forms, system overlays, candidate payloads
        ↓
-  test-arena/        ←  Behavioral test scenarios + results
+forms/               ← legacy synced forms
+       ↓
+evals/               ← benchmark data, result artifacts, slot specs
+       ↓
+search/              ← candidate generation, runners, reports
 ```
 
-**Personality is data, not prose.** The constitution defines behavioral invariants (evidence-first, answer-first, pushback, low-drama, execution-aware, scope-respect). Forms render different subsets of these invariants at different token budgets. The test arena measures the differences.
+**Personality is data, not prose.**
 
-## Quick Start
+The repo is moving toward:
+- semantic parameters
+- deterministic rendering
+- model-specific evaluation
+- static eval slots instead of disposable eval agents
+
+## Quick start
 
 ```bash
 git clone https://github.com/ameno-/leda-agents
 cd leda-agents
-
-# Run a single agent on a test task
-just run leda-compressed 001
-
-# Run all agents on a task
-just test 001
-
-# Compare results
-just compare 001
+python3 scripts/render_profiles.py --sync-legacy
+cat evals/results.md
 ```
 
-## Key Findings (MiniMax M2.5, 14 Experiments)
+## Repo highlights
 
-- **Active language beats passive**: "Refuse to implement" improved pushback from +0.20 to +0.85
-- **Token budgets are model-specific**: M2.5 handles 500 tokens, M2.7 breaks at 150+
-- **Directives compete**: evidence-first and scope-respect conflict when both emphasized
-- **Compressed form achieved min_delta = 0.00** — no regressions across all 6 dimensions
+- [`constitution.json`](./constitution.json) — behavioral source of truth
+- [`personality/profiles/base/`](./personality/profiles/base/) — baseline personality profiles
+- [`generated/`](./generated/) — rendered outputs from parameterized profiles
+- [`evals/results.md`](./evals/results.md) — current cross-model result summary
+- [`evals/rubric.txt`](./evals/rubric.txt) — grader rubric
+- [`search/run_experiment.py`](./search/run_experiment.py) — static-slot experiment runner scaffold
 
-## Model Compatibility
+## Current findings
 
-| Model | Stealth | Compressed | Full |
-|-------|---------|------------|------|
-| Claude Opus 4.6 | ✅ | ✅ | ✅ |
-| MiniMax M2.5 | ✅ | ✅ | ✅ |
-| MiniMax M2.7 | ✅ | ✅ | ❌ |
-| GLM-5 Turbo | ⚠️ | ❌ | ❌ |
+1. **Stealth scales with stronger models**
+2. **Compressed is not universally best**
+3. **Full can regress on stronger models**
+4. **Scope-respect is the main regression surface**
+5. **Eval environment contamination is real** — fixture isolation matters
 
-## Directory Structure
+## Why this exists
 
-```
-leda-agents/
-├── constitution.json      # Canonical behavioral source
-├── layers.json            # Layer composition rules
-├── manifest.json          # Project manifest
-├── agents/                # Letta agent definitions (YAML)
-├── forms/                 # Rendered personality forms
-├── test-arena/            # Behavioral test scenarios
-├── skills/                # Agent skills
-└── justfile               # Test runner commands
-```
+Most prompt tuning work still treats personality as prose.
+This repo treats it as a system:
+- source
+- rendering
+- evaluation
+- regression detection
+
+That makes the failures legible.
 
 ## License
 

@@ -1,0 +1,8 @@
+{
+  "name": "leda-eval-gpt41mini",
+  "model": "openai/gpt-4.1-mini",
+  "tags": ["leda-eval", "slot", "model:gpt41mini"],
+  "conversation_strategy": "new-conversation-per-sample",
+  "candidate_application": "session_overlay",
+  "description": "Static eval harness agent for GPT-4.1 mini comparisons."
+}

@@ -1,0 +1,161 @@
+{
+  "id": "full-v1",
+  "canonical_name": "full",
+  "form": "full",
+  "layers": [
+    "core",
+    "structure",
+    "intervention",
+    "orchestration",
+    "followthrough"
+  ],
+  "params": {
+    "refusal_strength": "high",
+    "refusal_style": "blunt",
+    "scope_deferral_explicitness": "high",
+    "investigation_bias": "medium",
+    "structure_rigidity": "high",
+    "loop_intervention_aggressiveness": "high",
+    "verification_rigidity": "high",
+    "verbosity_budget": "explicit"
+  },
+  "source_rule_ids": [
+    "evidence_first",
+    "answer_first",
+    "pushback",
+    "low_drama",
+    "execution_aware",
+    "scope_respect"
+  ],
+  "layer_metadata": {
+    "core": {
+      "id": "core",
+      "name": "Core Behavioral Constitution",
+      "description": "The 6 foundational behavioral rules: evidence-first, answer-first, pushback, low-drama, execution-aware, scope-respect.",
+      "approximateTokens": 150,
+      "required": true,
+      "dependencies": [],
+      "constitutionSections": [
+        "behavioralInvariants"
+      ],
+      "forms": [
+        "compressed",
+        "stealth",
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "gemini",
+        "claude",
+        "pi",
+        "kimi",
+        "goose"
+      ]
+    },
+    "structure": {
+      "id": "structure",
+      "name": "Response Structure",
+      "description": "Default response ordering for analysis and implementation turns. Adaptive, not mechanical.",
+      "approximateTokens": 100,
+      "required": false,
+      "dependencies": [
+        "core"
+      ],
+      "constitutionSections": [
+        "responseDefaults"
+      ],
+      "forms": [
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "gemini",
+        "claude",
+        "pi",
+        "kimi",
+        "goose"
+      ]
+    },
+    "intervention": {
+      "id": "intervention",
+      "name": "Intervention Protocols",
+      "description": "Doom loop detection and tool retry recovery templates. Structured recovery checklists.",
+      "approximateTokens": 100,
+      "required": false,
+      "dependencies": [
+        "core"
+      ],
+      "constitutionSections": [
+        "interventionProtocols"
+      ],
+      "forms": [
+        "compressed",
+        "stealth",
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "gemini",
+        "claude",
+        "pi",
+        "kimi",
+        "goose"
+      ]
+    },
+    "orchestration": {
+      "id": "orchestration",
+      "name": "Orchestration Discipline",
+      "description": "Batch-oriented planning, one-shot delivery protocol, independence rules, and anti-patterns.",
+      "approximateTokens": 300,
+      "required": false,
+      "dependencies": [
+        "core",
+        "structure"
+      ],
+      "constitutionSections": [
+        "orchestration",
+        "citation"
+      ],
+      "forms": [
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "goose"
+      ]
+    },
+    "followthrough": {
+      "id": "followthrough",
+      "name": "Follow-Through",
+      "description": "Completion gates, verification requirements, pending item classification, and completion documentation.",
+      "approximateTokens": 400,
+      "required": false,
+      "dependencies": [
+        "core",
+        "orchestration"
+      ],
+      "constitutionSections": [
+        "followThrough"
+      ],
+      "forms": [
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "goose"
+      ]
+    }
+  },
+  "render": {
+    "form_path": "generated/forms/full.md",
+    "system_path": "generated/system/full.txt",
+    "form_sha256": "fa89ee7fd1ae4dcc51870a2112d5a33f656e2bc463afbdbb10e5c892e164f511",
+    "system_sha256": "54b6324e6095f783c55ad03770eba3c056790cb0a07e74802a81be6671a4470d"
+  },
+  "notes": "Baseline full profile matching the current long-form Leda architecture."
+}

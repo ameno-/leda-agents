@@ -1,0 +1,86 @@
+{
+  "id": "stealth-v1",
+  "canonical_name": "stealth",
+  "form": "stealth",
+  "layers": [
+    "core",
+    "intervention"
+  ],
+  "params": {
+    "refusal_strength": "medium",
+    "refusal_style": "kind",
+    "investigation_bias": "low",
+    "loop_intervention_aggressiveness": "medium",
+    "verification_rigidity": "medium",
+    "verbosity_budget": "tight"
+  },
+  "source_rule_ids": [
+    "evidence_first",
+    "answer_first",
+    "pushback",
+    "low_drama",
+    "execution_aware",
+    "scope_respect"
+  ],
+  "layer_metadata": {
+    "core": {
+      "id": "core",
+      "name": "Core Behavioral Constitution",
+      "description": "The 6 foundational behavioral rules: evidence-first, answer-first, pushback, low-drama, execution-aware, scope-respect.",
+      "approximateTokens": 150,
+      "required": true,
+      "dependencies": [],
+      "constitutionSections": [
+        "behavioralInvariants"
+      ],
+      "forms": [
+        "compressed",
+        "stealth",
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "gemini",
+        "claude",
+        "pi",
+        "kimi",
+        "goose"
+      ]
+    },
+    "intervention": {
+      "id": "intervention",
+      "name": "Intervention Protocols",
+      "description": "Doom loop detection and tool retry recovery templates. Structured recovery checklists.",
+      "approximateTokens": 100,
+      "required": false,
+      "dependencies": [
+        "core"
+      ],
+      "constitutionSections": [
+        "interventionProtocols"
+      ],
+      "forms": [
+        "compressed",
+        "stealth",
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "gemini",
+        "claude",
+        "pi",
+        "kimi",
+        "goose"
+      ]
+    }
+  },
+  "render": {
+    "form_path": "generated/forms/stealth.md",
+    "system_path": "generated/system/stealth.txt",
+    "form_sha256": "fc48ab994b7a0d8b991d171f89ad94e1351e6bd27c6f8d4528f0669955da71de",
+    "system_sha256": "dd3a483c76fdcdea5221578670927af6cc4a8591c8b20d31e3c6fc11953a5151"
+  },
+  "notes": "Baseline stealth profile matching the current low-token Leda form."
+}

@@ -1,0 +1,21 @@
+{
+  "type": "summary",
+  "total": 12,
+  "total_attempted": 12,
+  "avg_score_attempted": 0.683,
+  "avg_score_total": 0.683,
+  "per_personality": {
+    "stealth": 0.6,
+    "compressed": 0.733,
+    "full": 0.667,
+    "none": 0.733
+  },
+  "per_model": {
+    "minimax/MiniMax-M2.7": 0.683
+  },
+  "per_task": {
+    "0": 1.0,
+    "1": 0.35,
+    "2": 0.7
+  }
+}

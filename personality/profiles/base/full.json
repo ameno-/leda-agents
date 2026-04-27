@@ -1,0 +1,17 @@
+{
+  "id": "full-v1",
+  "canonical_name": "full",
+  "form": "full",
+  "layers": ["core", "structure", "intervention", "orchestration", "followthrough"],
+  "notes": "Baseline full profile matching the current long-form Leda architecture.",
+  "params": {
+    "refusal_strength": "high",
+    "refusal_style": "blunt",
+    "scope_deferral_explicitness": "high",
+    "investigation_bias": "medium",
+    "structure_rigidity": "high",
+    "loop_intervention_aggressiveness": "high",
+    "verification_rigidity": "high",
+    "verbosity_budget": "explicit"
+  }
+}

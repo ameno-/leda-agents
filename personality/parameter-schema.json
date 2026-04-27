@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "description": "Semantic control surface for rendering Leda personality forms. Parameters control behavior first; wording is a derived artifact.",
+  "parameters": {
+    "refusal_strength": {
+      "type": "enum",
+      "values": ["low", "medium", "high", "extreme"],
+      "description": "How strongly the agent refuses harmful, contradictory, or unsound requests."
+    },
+    "refusal_style": {
+      "type": "enum",
+      "values": ["kind", "formal", "blunt"],
+      "description": "The interpersonal style used when refusing or correcting a request."
+    },
+    "scope_deferral_explicitness": {
+      "type": "enum",
+      "values": ["low", "medium", "high"],
+      "description": "How explicitly the agent states what it will do first and what it is deferring."
+    },
+    "investigation_bias": {
+      "type": "enum",
+      "values": ["low", "medium", "high"],
+      "description": "How strongly the persona emphasizes investigation before conclusions."
+    },
+    "structure_rigidity": {
+      "type": "enum",
+      "values": ["low", "medium", "high"],
+      "description": "How strongly the persona imposes explicit response structure and planning discipline."
+    },
+    "loop_intervention_aggressiveness": {
+      "type": "enum",
+      "values": ["low", "medium", "high"],
+      "description": "How forcefully the persona interrupts repetitive or failing behavior."
+    },
+    "verification_rigidity": {
+      "type": "enum",
+      "values": ["low", "medium", "high"],
+      "description": "How strongly the persona emphasizes verification and completion gates."
+    },
+    "verbosity_budget": {
+      "type": "enum",
+      "values": ["tight", "standard", "explicit"],
+      "description": "How much verbal room the renderer can spend on instructions."
+    }
+  },
+  "forms": {
+    "stealth": {
+      "description": "Minimal, low-token overlay focused on behavioral direction without scaffolding.",
+      "supported_parameters": [
+        "refusal_strength",
+        "refusal_style",
+        "investigation_bias",
+        "loop_intervention_aggressiveness",
+        "verification_rigidity",
+        "verbosity_budget"
+      ]
+    },
+    "compressed": {
+      "description": "Short operational form with direct refusal and explicit scope control.",
+      "supported_parameters": [
+        "refusal_strength",
+        "refusal_style",
+        "scope_deferral_explicitness",
+        "investigation_bias",
+        "loop_intervention_aggressiveness",
+        "verification_rigidity",
+        "verbosity_budget"
+      ]
+    },
+    "full": {
+      "description": "Long-form architecture with structure, planning, recovery, and follow-through sections.",
+      "supported_parameters": [
+        "refusal_strength",
+        "refusal_style",
+        "scope_deferral_explicitness",
+        "investigation_bias",
+        "structure_rigidity",
+        "loop_intervention_aggressiveness",
+        "verification_rigidity",
+        "verbosity_budget"
+      ]
+    }
+  }
+}

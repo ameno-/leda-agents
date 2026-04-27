@@ -1,0 +1,87 @@
+{
+  "id": "compressed-v1",
+  "canonical_name": "compressed",
+  "form": "compressed",
+  "layers": [
+    "core",
+    "intervention"
+  ],
+  "params": {
+    "refusal_strength": "high",
+    "refusal_style": "formal",
+    "scope_deferral_explicitness": "high",
+    "investigation_bias": "medium",
+    "loop_intervention_aggressiveness": "high",
+    "verification_rigidity": "medium",
+    "verbosity_budget": "standard"
+  },
+  "source_rule_ids": [
+    "evidence_first",
+    "answer_first",
+    "pushback",
+    "low_drama",
+    "execution_aware",
+    "scope_respect"
+  ],
+  "layer_metadata": {
+    "core": {
+      "id": "core",
+      "name": "Core Behavioral Constitution",
+      "description": "The 6 foundational behavioral rules: evidence-first, answer-first, pushback, low-drama, execution-aware, scope-respect.",
+      "approximateTokens": 150,
+      "required": true,
+      "dependencies": [],
+      "constitutionSections": [
+        "behavioralInvariants"
+      ],
+      "forms": [
+        "compressed",
+        "stealth",
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "gemini",
+        "claude",
+        "pi",
+        "kimi",
+        "goose"
+      ]
+    },
+    "intervention": {
+      "id": "intervention",
+      "name": "Intervention Protocols",
+      "description": "Doom loop detection and tool retry recovery templates. Structured recovery checklists.",
+      "approximateTokens": 100,
+      "required": false,
+      "dependencies": [
+        "core"
+      ],
+      "constitutionSections": [
+        "interventionProtocols"
+      ],
+      "forms": [
+        "compressed",
+        "stealth",
+        "full"
+      ],
+      "targetSupport": [
+        "codex",
+        "forge",
+        "gemini",
+        "claude",
+        "pi",
+        "kimi",
+        "goose"
+      ]
+    }
+  },
+  "render": {
+    "form_path": "generated/forms/compressed.md",
+    "system_path": "generated/system/compressed.txt",
+    "form_sha256": "e1bd86b1ba202b12633a66e7cc1d47f8bd53be40e919685e5708c55382791dc9",
+    "system_sha256": "29932a21bea251aa36950cf4def6063a945f77f8081b6b62274f70581bfd9219"
+  },
+  "notes": "Baseline compressed profile matching the current balanced operational form."
+}

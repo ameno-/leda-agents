@@ -1,0 +1,16 @@
+{
+  "id": "compressed-v1",
+  "canonical_name": "compressed",
+  "form": "compressed",
+  "layers": ["core", "intervention"],
+  "notes": "Baseline compressed profile matching the current balanced operational form.",
+  "params": {
+    "refusal_strength": "high",
+    "refusal_style": "formal",
+    "scope_deferral_explicitness": "high",
+    "investigation_bias": "medium",
+    "loop_intervention_aggressiveness": "high",
+    "verification_rigidity": "medium",
+    "verbosity_budget": "standard"
+  }
+}

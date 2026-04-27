@@ -51,7 +51,20 @@ create-results task_id agent:
 show-config:
     @echo "Constitution: constitution.json"
     @echo "Layers: layers.json"
+    @echo "Parameter schema: personality/parameter-schema.json"
     @echo "Forms:"
     @for f in forms/*.md; do echo "  $$f"; done
     @echo "Agents:"
     @for f in agents/*.yaml; do echo "  $$f"; done
+
+# Render baseline profiles into generated artifacts and sync legacy forms/system files
+render:
+    @python3 scripts/render_profiles.py --sync-legacy
+
+# Generate one-factor-at-a-time candidates from a base profile
+gen-candidates profile:
+    @python3 search/candidate_generator.py {{profile}}
+
+# Aggregate eval result directories into a machine-readable report
+report-results *dirs:
+    @python3 search/report_results.py {{dirs}}

@@ -1,0 +1,8 @@
+{
+  "name": "leda-eval-minimax-m27",
+  "model": "minimax/MiniMax-M2.7",
+  "tags": ["leda-eval", "slot", "model:m27"],
+  "conversation_strategy": "new-conversation-per-sample",
+  "candidate_application": "session_overlay",
+  "description": "Static eval harness agent for MiniMax M2.7 comparisons."
+}

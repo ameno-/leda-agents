@@ -1,0 +1,7 @@
+.letta/
+__pycache__/
+*.pyc
+search/candidates/
+search/reports/
+search/runs/
+evals/__pycache__/

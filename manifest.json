@@ -94,9 +94,9 @@
     {
       "id": "render_pipeline",
       "kind": "tool",
-      "path": "scripts/render.sh",
-      "status": "pending",
-      "description": "Generates all prompt fragments and target configs from constitution.json"
+      "path": "scripts/render_profiles.py",
+      "status": "ready",
+      "description": "Generates forms, system overlays, and candidate payloads from parameterized personality profiles."
     },
     {
       "id": "validation_pipeline",
@@ -109,8 +109,8 @@
       "id": "personality_forms",
       "kind": "artifact",
       "path": "forms/",
-      "status": "pending",
-      "description": "Compressed, stealth, and full personality forms for different application contexts"
+      "status": "ready",
+      "description": "Compressed, stealth, and full personality forms rendered from the parameterized profile system."
     },
     {
       "id": "core_constitution_prompt",

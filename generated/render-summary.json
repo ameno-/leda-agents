@@ -1,0 +1,9 @@
+{
+  "rendered_profiles": [
+    "compressed-v1",
+    "full-v1",
+    "stealth-v1"
+  ],
+  "generated_dir": "generated",
+  "sync_legacy": true
+}

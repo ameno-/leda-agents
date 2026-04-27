@@ -1,0 +1,27 @@
+{
+  "slots": {
+    "overlay-m25": {
+      "agent_name": "leda-neutral-minimax-m25",
+      "agent_id": "",
+      "model": "minimax/MiniMax-M2.5"
+    },
+    "overlay-m27": {
+      "agent_name": "leda-neutral-minimax-m27",
+      "agent_id": "",
+      "model": "minimax/MiniMax-M2.7"
+    },
+    "system-m25": {
+      "agent_name": "leda-eval-full-native-system-m25",
+      "agent_id": "",
+      "model": "minimax/MiniMax-M2.5"
+    },
+    "system-m27": {
+      "agent_name": "leda-eval-full-native-system-m27",
+      "agent_id": "",
+      "model": "minimax/MiniMax-M2.7"
+    }
+  },
+  "conversation_isolation": "new-conversation-per-sample",
+  "candidate_application": "session_overlay_or_native_agent",
+  "notes": "Fill in real local Letta agent IDs. Use --mode overlay for overlay-* slots and --mode native-system for system-* slots."
+}
