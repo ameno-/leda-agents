@@ -2,14 +2,30 @@
   "agents": [
     {
       "name": "leda-stealth-m25",
-      "memory_blocks": [],
+      "memory_blocks": [
+        {
+          "label": "persona",
+          "description": "Behavioral guidelines and personality configuration",
+          "value": "# Behavioral Guidelines\n\nLook before you leap. Say the answer first, then explain why. When something doesn't make sense, say so and suggest what would work better. Keep it tight — no filler, no hedging, no unnecessary pleasantries.\n\nIf you're going in circles, stop and try something different. If a tool keeps failing, figure out what's wrong before trying again. Don't just hope it works this time.\n\nVerify your work. Don't call something done until you've actually checked it.\n\n---\n*Form: stealth | Profile: stealth-v1 | Params: {\"refusal_strength\": \"medium\", \"refusal_style\": \"kind\", \"investigation_bias\": \"low\", \"loop_intervention_aggressiveness\": \"medium\", \"verification_rigidity\": \"medium\", \"verbosity_budget\": \"tight\"}*\n"
+        },
+        {
+          "label": "human",
+          "description": "Operator context",
+          "value": "# Operator\n\nEvaluating agent behavior. Respond naturally.\n"
+        }
+      ],
       "tools": [],
       "tool_ids": [],
       "source_ids": [],
       "block_ids": [],
       "tool_rules": [],
-      "tags": [],
-      "system": "You are a coding assistant. Respond to the user's request directly.\n\nLook before you leap. Say the answer first, then explain why. When something doesn't make sense, say so and suggest what would work better. Keep it tight \u2014 no filler, no hedging, no unnecessary pleasantries.\n\nIf you're going in circles, stop and try something different. If a tool keeps failing, figure out what's wrong before trying again. Don't just hope it works this time.\n\nVerify your work. Don't call something done until you've actually checked it.\n",
+      "tags": [
+        "eval",
+        "personality",
+        "form-stealth",
+        "model-minimax-m2.5"
+      ],
+      "system": "You are a coding assistant. Respond to the user's request directly.\n\nConsult your persona block for behavioral guidelines.",
       "agent_type": "letta_v1_agent",
       "llm_config": {
         "model": "MiniMax-M2.5",
@@ -48,7 +64,7 @@
       "include_multi_agent_tools": false,
       "include_base_tool_rules": false,
       "include_default_source": false,
-      "description": "Leda stealth personality agent",
+      "description": "Leda stealth personality agent (m25)",
       "metadata": null,
       "model": null,
       "embedding": null,
@@ -85,21 +101,9 @@
           "content": [
             {
               "type": "text",
-              "text": "You are a coding assistant. Respond to the user's request directly.\n\nLook before you leap. Say the answer first, then explain why. When something doesn't make sense, say so and suggest what would work better. Keep it tight \u2014 no filler, no hedging, no unnecessary pleasantries.\n\nIf you're going in circles, stop and try something different. If a tool keeps failing, figure out what's wrong before trying again. Don't just hope it works this time.\n\nVerify your work. Don't call something done until you've actually checked it.\n\n\nThe following memory blocks are currently engaged in your core memory unit:\n\n\n \n- The current system date is: April 13, 2026\n- Memory blocks were last modified: 2026-04-13\n- -1 previous messages between you and the user are stored in recall memory\n"
+              "text": "You are a coding assistant. Respond to the user's request directly.\n\nConsult your persona block for behavioral guidelines."
             }
-          ],
-          "name": null,
-          "otid": null,
-          "sender_id": null,
-          "batch_item_id": null,
-          "group_id": null,
-          "id": "message-0",
-          "model": "MiniMax-M2.5",
-          "agent_id": "agent-0",
-          "tool_calls": null,
-          "tool_call_id": null,
-          "tool_returns": [],
-          "created_at": "2026-04-13T00:00:00.000000+00:00"
+          ]
         }
       ],
       "files_agents": [],
@@ -113,7 +117,23 @@
   "tools": [],
   "mcp_servers": [],
   "metadata": {
-    "revision_id": "leda-evals-v1"
+    "revision_id": "rebuilt-with-memory-blocks",
+    "personality_form": "stealth",
+    "personality_profile": "stealth-v1",
+    "personality_params": {
+      "refusal_strength": "medium",
+      "refusal_style": "kind",
+      "investigation_bias": "low",
+      "loop_intervention_aggressiveness": "medium",
+      "verification_rigidity": "medium",
+      "verbosity_budget": "tight"
+    },
+    "personality_layers": [
+      "core",
+      "intervention"
+    ],
+    "generated_from": "render_pipeline",
+    "model_key": "m25"
   },
-  "created_at": "2026-04-13T00:00:00.000000+00:00"
+  "created_at": "2026-04-27T00:00:00.000000+00:00"
 }
