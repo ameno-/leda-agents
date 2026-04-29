@@ -81,6 +81,22 @@ def load_personality(name: str) -> Optional[str]:
         return f.read()
 
 
+def load_af_file(personality: str, model_key: str) -> Optional[dict]:
+    """Load an .af file for the given personality and model. Returns the agent config."""
+    # Try model-specific file first
+    model_suffix = f"-{model_key}"
+    candidates = [
+        EVALS_DIR / f"leda-{personality}{model_suffix}.af",
+        EVALS_DIR / f"leda-{personality}.af",
+    ]
+    for path in candidates:
+        if path.exists():
+            with open(path) as f:
+                af = json.load(f)
+            return af["agents"][0]
+    return None
+
+
 # --- Daytona sandbox execution ---
 
 def sandbox_exec(code: str, timeout: int = 30) -> dict:
@@ -212,45 +228,62 @@ def letta_api(method: str, path: str, data: dict = None) -> dict:
     return resp.json()
 
 
-def create_eval_agent(name: str, personality_text: Optional[str], model_handle: str) -> str:
-    """Create a minimal Letta agent for eval. Returns agent ID."""
-    system = "You are a coding assistant. Respond to the user's request directly.\n\n"
-    if personality_text:
-        system += personality_text
+def create_eval_agent(name: str, personality_text: Optional[str], model_handle: str,
+                          af_config: Optional[dict] = None) -> str:
+    """Create a Letta agent for eval. If af_config provided, uses memory blocks from .af file."""
+    if af_config:
+        # New path: use .af file with memory blocks
+        agent_data = {
+            "name": name,
+            "description": af_config.get("description", f"Eval agent: {name}"),
+            "system": af_config.get("system", "You are a coding assistant. Respond to the user's request directly."),
+            "llm_config": af_config.get("llm_config", {}),
+            "embedding_config": af_config.get("embedding_config", {}),
+            "memory_blocks": af_config.get("memory_blocks", []),
+            "include_base_tools": False,
+            "include_multi_agent_tools": False,
+            "include_base_tool_rules": False,
+            "include_default_source": False,
+        }
+    else:
+        # Legacy path: personality in system prompt (no memory blocks)
+        system = "You are a coding assistant. Respond to the user's request directly.\n\n"
+        if personality_text:
+            system += personality_text
 
-    agent_data = {
-        "name": name,
-        "description": f"Eval agent: {name}",
-        "system": system,
-        "llm_config": {
-            "model": model_handle.split("/")[-1],
-            "model_endpoint_type": "openai",
-            "model_endpoint": "https://api.openai.com/v1",
-            "provider_name": model_handle.split("/")[0],
-            "handle": model_handle,
-            "context_window": 30000,
-            "temperature": 0.7,
-            "put_inner_thoughts_in_kwargs": True,
-        },
-        "embedding_config": {
-            "embedding_endpoint_type": "openai",
-            "embedding_endpoint": "https://api.openai.com/v1",
-            "embedding_model": "text-embedding-3-small",
-            "embedding_dim": 2000,
-            "handle": "openai/text-embedding-3-small",
-        },
-        "include_base_tools": False,
-        "include_multi_agent_tools": False,
-        "include_base_tool_rules": False,
-        "include_default_source": False,
-    }
+        agent_data = {
+            "name": name,
+            "description": f"Eval agent: {name}",
+            "system": system,
+            "llm_config": {
+                "model": model_handle.split("/")[-1],
+                "model_endpoint_type": "openai",
+                "model_endpoint": "https://api.openai.com/v1",
+                "provider_name": model_handle.split("/")[0],
+                "handle": model_handle,
+                "context_window": 30000,
+                "temperature": 0.7,
+                "put_inner_thoughts_in_kwargs": True,
+            },
+            "embedding_config": {
+                "embedding_endpoint_type": "openai",
+                "embedding_endpoint": "https://api.openai.com/v1",
+                "embedding_model": "text-embedding-3-small",
+                "embedding_dim": 2000,
+                "handle": "openai/text-embedding-3-small",
+            },
+            "include_base_tools": False,
+            "include_multi_agent_tools": False,
+            "include_base_tool_rules": False,
+            "include_default_source": False,
+        }
 
-    # MiniMax needs different endpoint config
-    if "minimax" in model_handle:
-        agent_data["llm_config"]["model_endpoint_type"] = "minimax"
-        agent_data["llm_config"]["model_endpoint"] = "https://api.minimax.io/anthropic"
-        agent_data["llm_config"]["provider_name"] = "minimax"
-        agent_data["llm_config"]["context_window"] = 200000
+        # MiniMax needs different endpoint config
+        if "minimax" in model_handle:
+            agent_data["llm_config"]["model_endpoint_type"] = "minimax"
+            agent_data["llm_config"]["model_endpoint"] = "https://api.minimax.io/anthropic"
+            agent_data["llm_config"]["provider_name"] = "minimax"
+            agent_data["llm_config"]["context_window"] = 200000
 
     result = letta_api("POST", "/v1/agents/", agent_data)
     return result["id"]
@@ -373,7 +406,7 @@ class EvalRun:
     timestamp: str = ""
 
 
-def run_single(personality: str, model_handle: str, task: dict, run_id: str) -> EvalRun:
+def run_single(personality: str, model_handle: str, task: dict, run_id: str, model_key: str = "m27") -> EvalRun:
     """Run a single eval: create agent, send task, capture response, grade."""
     start = time.time()
     model_slug = model_handle.split("/")[-1].lower().replace(".", "")
@@ -393,10 +426,14 @@ def run_single(personality: str, model_handle: str, task: dict, run_id: str) -> 
     )
 
     try:
-        # 1. Create agent
+        # 1. Create agent (try .af file first, fallback to legacy system-prompt-only)
+        af_config = load_af_file(personality, model_key)
         personality_text = load_personality(personality)
-        print(f"  Creating agent: {slug}")
-        agent_id = create_eval_agent(slug, personality_text, model_handle)
+        if af_config:
+            print(f"  Creating agent from .af file (with memory blocks): {slug}")
+        else:
+            print(f"  Creating agent from system text (no memory blocks): {slug}")
+        agent_id = create_eval_agent(slug, personality_text, model_handle, af_config=af_config)
         run.agent_id = agent_id
         print(f"  Agent created: {agent_id[:20]}...")
 
@@ -478,7 +515,7 @@ def run_suite(personalities: list, models: list, task_ids: list = None):
             for task in dataset:
                 i += 1
                 print(f"\n[{i}/{total}] {personality}/{model_key}/task-{task['id']}")
-                run = run_single(personality, model_handle, task, run_id)
+                run = run_single(personality, model_handle, task, run_id, model_key=model_key)
                 runs.append(run)
 
                 # Append to JSONL immediately (survives crashes)
@@ -653,7 +690,7 @@ def main():
 
     for task in dataset:
         print(f"\nRunning: {personality}/{model_key}/task-{task['id']}")
-        run = run_single(personality, model_handle, task, run_id)
+        run = run_single(personality, model_handle, task, run_id, model_key=model_key)
         with open(results_dir / "results.jsonl", "a") as f:
             f.write(json.dumps(asdict(run)) + "\n")
         print(f"  Score: {run.score:.2f}")
